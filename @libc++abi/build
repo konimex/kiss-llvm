@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+# For musl systems
+sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
+
+export DESTDIR="$1"
+
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLIBCXXABI_LIBCXX_INCLUDES=libcxx/include \
+    -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+    -DLIBCXXABI_USE_COMPILER_RT=ON
+
+cmake --build build
+cmake --install build
+
+mkdir -p "$1/usr"
+cp -r include "$1/usr"

@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' cmake/config-ix.cmake
+
+# Building compiler-rt in GCC always results in segmentation fault.
+# Use clang for now.
+cmake -B build \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release
+
+cmake --build   build
+cmake --install build
+
+mkdir -p "$1/usr/lib/clang/9.0.1/lib"
+mv "$1/usr/lib/linux" "$1/usr/lib/clang/9.0.1/lib"

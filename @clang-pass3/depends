@@ -1,0 +1,7 @@
+cmake  make
+@llvm-pass2
+libc++
+compiler-rt
+python make
+xz
+zlib

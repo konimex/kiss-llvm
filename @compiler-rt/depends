@@ -1,0 +1,2 @@
+cmake        make
+@clang-pass1 make

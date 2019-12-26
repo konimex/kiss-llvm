@@ -1,0 +1,8 @@
+cmake        make
+python       make
+@clang-pass2 make
+libedit
+ncurses
+libxml2
+xz
+zlib

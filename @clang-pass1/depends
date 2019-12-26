@@ -1,0 +1,5 @@
+cmake  make
+@llvm-pass1
+python make
+xz
+zlib
