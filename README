@@ -6,6 +6,9 @@ traces of GCC), you'll need these.
 Packages with @ in front of them denotes temporary bootstrap packages,
 you may safely uninstall them after you built the main LLVM package.
 
+This repo is only tested for x86_64, other architectures may need
+additional configurations.
+
 NOTE: This is what I could do, however, if you can find a better way
       that doesn't require 2 passes to clang, patches welcome! Also,
       some required packages may be missing.
