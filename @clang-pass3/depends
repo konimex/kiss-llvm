@@ -1,7 +1,0 @@
-@compiler-rt
-@libc++
-@llvm-pass2
-cmake  make
-python make
-xz
-zlib

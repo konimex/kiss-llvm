@@ -7,7 +7,7 @@ Packages with @ in front of them denotes temporary bootstrap packages,
 you may safely uninstall them after you built the main LLVM package.
 
 NOTE: This is what I could do, however, if you can find a better way
-      that doesn't require 3 passes to clang, patches welcome! Also,
+      that doesn't require 2 passes to clang, patches welcome! Also,
       some required packages may be missing.
 
 See respective build files for more information.
@@ -24,5 +24,3 @@ Installation order as follows:
 8.  @clang-pass2
     - NOTE: remove @clang-pass1 before installing @clang-pass2
 9.  @lld
-10. @clang-pass3 (This might be optional, but I haven't tested this yet.)
-    - NOTE: remove @clang-pass2 before installing @clang-pass3
