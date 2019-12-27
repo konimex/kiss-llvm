@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# For musl systems
+sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
+
 export DESTDIR="$1"
 
 cmake -B build \
