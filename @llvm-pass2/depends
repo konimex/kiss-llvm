@@ -1,5 +1,4 @@
 cmake  make
 python make
 @libc++
-@lld   make
 zlib
