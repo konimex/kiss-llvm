@@ -1,8 +1,8 @@
 cmake  make
-compiler-rt
+@compiler-rt
 @llvm-pass2
 gcc
-libc++
+@libc++
 python make
 xz
 zlib
