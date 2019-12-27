@@ -23,6 +23,6 @@ Installation order as follows:
     - NOTE: remove @llvm-pass1 before installing @llvm-pass2
 8.  @clang-pass2
     - NOTE: remove @clang-pass1 before installing @clang-pass2
-9.  @lld (This might be optional, I forgot.)
-10. @clang-pass3
+9.  @lld
+10. @clang-pass3 (This might be optional, but I haven't tested this yet.)
     - NOTE: remove @clang-pass2 before installing @clang-pass3
