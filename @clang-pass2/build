@@ -3,7 +3,7 @@
 cmake -B build \
     -DCMAKE_C_COMPILER=gcc \
     -DCMAKE_CXX_COMPILER=g++ \
-    -DCMAKE_CXX_FLAGS="-nostdinc -I/usr/include/c++/v1 -nodefaultlibs -lc++ -lc++abi -lm -lc -lgcc -lgcc_s" \
+    -DCMAKE_CXX_FLAGS="-nostdinc++ -I/usr/include/c++/v1 -nodefaultlibs -lc++ -lc++abi -lm -lc -lgcc -lgcc_s" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
     -DLLVM_ENABLE_RTTI=ON \
