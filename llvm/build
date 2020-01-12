@@ -19,6 +19,9 @@ cmake -B build \
     -DLLVM_ENABLE_PROJECTS="clang;compiler-rt;libunwind;libcxxabi;libcxx;lld" \
     -DLLVM_ENABLE_RTTI=ON \
     -DLLVM_ENABLE_EH=ON \
+    -DLLVM_ENABLE_TERMINFO=OFF \
+    -DLLVM_ENABLE_LIBXML2=OFF \
+    -DLLVM_ENABLE_LIBEDIT=OFF \
     -DLLVM_HOST_TRIPLE="$(clang -dumpmachine)" \
     -DLLVM_BUILD_EXAMPLES=OFF \
     -DLLVM_BUILD_DOCS=OFF \
@@ -61,6 +64,12 @@ ln -s llvm-strip "$1/usr/bin/strip"
 
 # Clang: Some legacy programs may require cc
 ln -s clang "$1/usr/bin/cc"
+
+# Clang: equivalent for c++
+ln -s clang++ "$1/usr/bin/c++"
+
+# Clang: equivalent for cpp
+ln -s clang-cpp "$1/usr/bin/cpp"
 
 # Clang: POSIX compliance
 install -m755 c99 "$1/usr/bin/c99"
