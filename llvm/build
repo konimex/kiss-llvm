@@ -28,6 +28,7 @@ cmake -B build \
     -DLLVM_BUILD_TESTS=OFF \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_ENABLE_LLD=ON \
+    -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
     -DLIBUNWIND_USE_COMPILER_RT=ON \
     -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
     -DLIBCXXABI_USE_COMPILER_RT=ON \
@@ -46,21 +47,6 @@ cmake --install build
 # libc++abi header files
 mkdir -p "$1/usr"
 cp -r libcxxabi/include "$1/usr"
-
-# LLD and LLVM tools: Replace GNU binutils
-ln -s ld.lld "$1/usr/bin/ld"
-ln -s llvm-addr2line "$1/usr/bin/addr2line"
-ln -s llvm-ar "$1/usr/bin/ar"
-ln -s llvm-as "$1/usr/bin/as"
-ln -s llvm-cxxfilt "$1/usr/bin/c++filt"
-ln -s llvm-nm "$1/usr/bin/nm"
-ln -s llvm-objcopy "$1/usr/bin/objcopy"
-ln -s llvm-objdump "$1/usr/bin/objdump"
-ln -s llvm-ranlib "$1/usr/bin/ranlib"
-ln -s llvm-readelf "$1/usr/bin/readelf"
-ln -s llvm-size "$1/usr/bin/size"
-ln -s llvm-strings "$1/usr/bin/strings"
-ln -s llvm-strip "$1/usr/bin/strip"
 
 # Clang: Some legacy programs may require cc
 ln -s clang "$1/usr/bin/cc"
