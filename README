@@ -9,21 +9,16 @@ you may safely uninstall them after you built the main LLVM package.
 This repo is only tested for x86_64, other architectures may need
 additional configurations.
 
-NOTE: This is what I could do, however, if you can find a better way
-      that doesn't require 2 passes to clang, patches welcome! Also,
-      some required packages may be missing.
+NOTE: This is what I could do, however, if you can find a better way,
+      patches welcome! Also, some required packages may be missing.
 
 See respective build files for more information.
 
 Installation order as follows:
-1.  @llvm-pass1
-2.  @clang-pass1
+1.  @llvm
+2.  @clang
 3.  @compiler-rt
 4.  @libunwind
 5.  @libc++abi
 6.  @libc++
-7.  @llvm-pass2
-    - NOTE: remove @llvm-pass1 before installing @llvm-pass2
-8.  @clang-pass2
-    - NOTE: remove @clang-pass1 before installing @clang-pass2
-9.  @lld
+7.  @lld
