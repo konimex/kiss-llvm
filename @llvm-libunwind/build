@@ -4,7 +4,9 @@ export DESTDIR="$1"
 
 cmake -B build \
     -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_C_FLAGS="$CFLAGS --unwindlib=none" \
     -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS --unwindlib=none --stdlib=libstdc++" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
     -DLIBUNWIND_USE_COMPILER_RT=ON \
