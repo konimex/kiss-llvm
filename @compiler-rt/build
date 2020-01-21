@@ -8,7 +8,9 @@ sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZ
 # Use clang for now.
 cmake -B build \
     -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_C_FLAGS="$CFLAGS --rtlib=libgcc --unwind-lib=libgcc" \
     -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS --stdlib=libstdc++ --rtlib=libgcc --unwind-lib=libgcc" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release
 
