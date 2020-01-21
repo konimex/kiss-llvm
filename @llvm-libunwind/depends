@@ -1,2 +1,2 @@
-cmake        make
-@clang-pass1 make
+cmake       make
+@llvm-pass1 make
