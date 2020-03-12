@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
+sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' compiler-rt/cmake/config-ix.cmake
+
 export DESTDIR="$1"
 
 cmake -B build \
@@ -22,6 +25,8 @@ cmake -B build \
     -DCLANG_LINK_CLANG_DYLIB=ON \
     -DCLANG_INCLUDE_DOCS=OFF \
     -DCLANG_INCLUDE_TESTS=OFF \
+    -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON \
+    -DCOMPILER_RT_EXCLUDE_ATOMIC_BUILTIN=OFF \
     -Wno-dev llvm
 
 cmake --build build
