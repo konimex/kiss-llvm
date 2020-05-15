@@ -15,5 +15,5 @@ cmake -B build \
 cmake --build   build
 cmake --install build
 
-mkdir -p "$1/usr/lib/clang/9.0.1/lib"
-mv "$1/usr/lib/linux" "$1/usr/lib/clang/9.0.1/lib"
+mkdir -p "$1/usr/lib/clang/10.0.0/lib"
+mv "$1/usr/lib/linux" "$1/usr/lib/clang/10.0.0/lib"
