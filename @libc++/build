@@ -8,11 +8,12 @@ export DESTDIR="$1"
 cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
     -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
     -DLIBCXX_CXX_ABI=libcxxabi \
     -DLIBCXX_USE_COMPILER_RT=ON \
-    -DLIBCXX_HAS_MUSL_LIBC=ON \
-    -DLIBCXXABI_USE_COMPILER_RT=ON
+    -DLIBCXX_HAS_MUSL_LIBC=ON
 
 cmake --build build
 cmake --install build

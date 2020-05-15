@@ -22,8 +22,5 @@ Installation order as follows:
 4.  @libunwind
 5.  @libc++abi
 6.  @libc++
-7.  @llvm-pass2
-    - NOTE: remove @llvm-pass1 before installing @llvm-pass2
-8.  @clang-pass2
+7.  @clang-pass2
     - NOTE: remove @clang-pass1 before installing @clang-pass2
-9.  @lld
