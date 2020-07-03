@@ -1,5 +1,9 @@
 This is a kiss-compliant repo structure to build LLVM.
 
+=======================================================================
+
+Building kiss-llvm
+
 To build LLVM compiler infrastructure from scratch (and without any
 traces of GCC), you'll need these.
 
@@ -24,3 +28,40 @@ Installation order as follows:
 6.  @libc++
 7.  @clang-pass2
     - NOTE: remove @clang-pass1 before installing @clang-pass2
+
+=======================================================================
+
+Using LLVM from kiss-llvm
+
+After installing llvm from kiss-llvm (and uninstalling the temporary
+bootstrap packages), you can use the alternatives system to switch to
+LLVM-provided binutils (except as). Because programs might still detect
+GCC and use it, you can force Clang by applying environment variables
+CC=cc and CXX=c++ after applying the alternatives.
+
+Also, you will need to rebuild every single package that links to
+/lib/libstdc++.so, a small way to check if a library or a program links
+to libstdc++ (NOTE: this won't pass shellcheck and I'm sure Dylan has a
+better way than mine) is using the shell as follows:
+
+$ for file in /usr/bin/* /usr/lib/*; do
+      echo FILE: $file         # This is as an identifier of which file
+      ldd $file | grep libstdc++
+  done
+
+You can use kiss-owns to check which file belongs to which package, and
+rebuild that.
+
+Note: Even if you have clang with libc++ and LLVM binutils,
+      unfortunately you can't remove gcc from base if you have rust,
+      since rust's bootstrap still dynamically link libgcc (and you
+      need patches AND provide your own bootstrap package [1]).
+
+=======================================================================
+
+If you think replacing just the compiler and the binutils is not enough,
+head on over to Wyverkiss [2] since the distribution also removes the
+need for GNU bison and many others (GNU make cannot be removed though).
+
+[1] https://github.com/wyvertux/rust-build
+[2] https://github.com/wyvertux/wyverkiss
