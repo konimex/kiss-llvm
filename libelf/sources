@@ -1,3 +1,3 @@
-https://downloads.sourceforge.net/sourceforge/elftoolchain/elftoolchain-0.7.1.tgz
-patches/libelf-linux.patch
-patches/gelf_symshndx.patch
+https://sourceware.org/elfutils/ftp/0.181/elfutils-0.181.tar.bz2
+patches/musl-decls.patch
+files/error.h lib
