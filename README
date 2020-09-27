@@ -64,21 +64,16 @@ libgcc_s.so.
 You can use kiss-owns to check which file belongs to which package, and
 rebuild that.
 
-Note 1: Since commit [1], KISS uses libelf from elfutils, which cannot
-        be compiled with Clang at all. As a solution, we used
-        elftoolchain instead with a patch to support Linux 5.8 or later.
-
-Note 2: Even if you have clang with libc++ and LLVM binutils,
-        unfortunately you can't remove gcc from base if you have rust,
-        since rust's bootstrap still dynamically link libgcc (and you
-        need patches AND provide your own bootstrap package [2]).
+Note: Even if you have clang with libc++ and LLVM binutils,
+      unfortunately you can't remove gcc from base if you have rust,
+      since rust's bootstrap still dynamically link libgcc (and you
+      need patches AND provide your own bootstrap package [1]).
 
 _______________________________________________________________________
 
 If you think replacing just the compiler and the binutils is not enough,
-head on over to Wyverkiss [3] since the distribution also removes the
+head on over to Wyverkiss [2] since the distribution also removes the
 need for GNU bison and many others (GNU make cannot be removed though).
 
-[1] https://github.com/kisslinux/repo/commit/ee62c900f91aade29e93b7fe83464810c44aab50#diff-be0139f0e4e8624ed200d372e2fbc594
-[2] https://github.com/wyvertux/rust-build
-[3] https://github.com/wyvertux/wyverkiss
+[1] https://github.com/wyvertux/rust-build
+[2] https://github.com/wyvertux/wyverkiss
