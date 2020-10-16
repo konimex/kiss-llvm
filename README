@@ -44,10 +44,10 @@ bootstrap packages), you can use the alternatives system to switch to
 LLVM-provided binutils (except as).
 
 Because programs might still detect GCC and use it, you can force Clang
-by applying environment variables CC=clang and CXX=clang++ after
-applying the alternatives. (This is particularly needed for some
-packages like Busybox as they explicitly detect Clang through the name
-of the binary)
+by applying environment variables CC=cc and CXX=c++ after applying the
+alternatives. (For some packages like Busybox, you may need to
+explicitly use CC=clang, as they explicitly detect Clang through the
+name of the binary)
 
 Also, you will need to rebuild every single package that links to
 /lib/libstdc++.so, a small way to check if a library or a program links
