@@ -5,12 +5,14 @@ sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' li
 
 export DESTDIR="$1"
 
+cd libcxxabi
+
 cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER=clang \
     -DCMAKE_CXX_COMPILER=clang++ \
-    -DLIBCXXABI_LIBCXX_INCLUDES=libcxx/include \
+    -DLIBCXXABI_LIBCXX_INCLUDES=../libcxx/include \
     -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
     -DLIBCXXABI_USE_COMPILER_RT=ON
 
