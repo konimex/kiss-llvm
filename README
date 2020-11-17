@@ -1,6 +1,6 @@
 |/
-|\ISS (unofficial repository)                          https://k1ss.org
-_______________________________________________________________________
+|\ISS (unofficial repository)                           https://k1ss.org
+________________________________________________________________________
 
 This is a kiss-compliant repository structure to build LLVM without any
 traces of GCC libraries. It also provides any alternatives for official
@@ -8,7 +8,7 @@ KISS packages that cannot be built with LLVM.
 
 
 Building kiss-llvm
-_______________________________________________________________________
+________________________________________________________________________
 
 To build LLVM compiler infrastructure from scratch (and without any
 traces of GCC), you'll need these.
@@ -26,18 +26,35 @@ NOTE: This is what I could do, however, if you can find a better way
 See respective build files for more information.
 
 Installation order as follows:
-1.  @llvm-pass1
-2.  @clang-pass1
-3.  @compiler-rt
-4.  @libunwind
-5.  @libc++abi
-6.  @libc++
-7.  @clang-pass2
-    - NOTE: remove @clang-pass1 before installing @clang-pass2
+1. @llvm-pass1
+2. @clang-pass1
+3. @compiler-rt
+4. @libunwind
+5. @libc++abi
+6. @libc++
+7. @clang-pass2
+   - NOTE: remove @clang-pass1 before installing @clang-pass2
 
+Recommended: Since downloading files repeatedly is a waste of bandwidth
+             (especially if you have a slow Internet), you can use these
+             commands to symlink thesource cache (usually located in
+             $HOME/.cache/kiss/sources):
+
+$ ln -s llvm @llvm-pass1
+$ ln -s llvm @clang-pass1
+$ ln -s llvm @clang-pass2
+$ ln -s llvm @compiler-rt
+$ ln -s llvm @llvm-libunwind
+$ ln -s llvm @libc++abi
+$ ln -s llvm @libc++
+
+And make sure to download the main LLVM package sources first and NOT
+the bootstrap packages (by using `kiss c` in the llvm directory, or by
+using `kiss c llvm` after adding the kiss-llvm directory to $PATH, make
+sure the checksums are NOT changed, git should be able to track these).
 
 Using LLVM from kiss-llvm
-_______________________________________________________________________
+________________________________________________________________________
 
 After installing llvm from kiss-llvm (and uninstalling the temporary
 bootstrap packages), you can use the alternatives system to switch to
@@ -69,7 +86,7 @@ Note: Even if you have clang with libc++ and LLVM binutils,
       since rust's bootstrap still dynamically link libgcc (and you
       need patches AND provide your own bootstrap package [1]).
 
-_______________________________________________________________________
+________________________________________________________________________
 
 If you think replacing just the compiler and the binutils is not enough,
 head on over to Wyverkiss [2] since the distribution also removes the
