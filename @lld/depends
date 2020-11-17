@@ -1,5 +1,0 @@
-cmake        make
-python       make
-@clang-pass2 make
-xz
-zlib

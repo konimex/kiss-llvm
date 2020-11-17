@@ -1,7 +1,0 @@
-cmake  make
-@compiler-rt
-gcc
-@libc++
-python make
-xz
-zlib
