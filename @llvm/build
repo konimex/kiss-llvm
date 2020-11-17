@@ -1,0 +1,133 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+export LD_LIBRARY_PATH="$1/usr/lib:$LD_LIBRARY_PATH"
+export PATH="$1/usr/bin:$PATH"
+export LDFLAGS="-L$1/usr/lib $LDFLAGS"
+export CFLAGS="-I$1/usr/include $CFLAGS"
+export CXXFLAGS="-I$1/usr/include $CXXFLAGS"
+
+sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' compiler-rt/cmake/config-ix.cmake
+sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
+
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_BUILD_LLVM_DYLIB=OFF \
+    -DLLVM_LINK_LLVM_DYLIB=OFF \
+    -DLLVM_TARGETS_TO_BUILD="host" \
+    -DLLVM_ENABLE_RTTI=ON \
+    -DLLVM_HOST_TRIPLE="$(cc -dumpmachine)" \
+    -DLLVM_BUILD_EXAMPLES=OFF \
+    -DLLVM_BUILD_DOCS=OFF \
+    -DLLVM_BUILD_TESTS=OFF \
+    -DLLVM_ENABLE_TERMINFO=OFF \
+    -DLLVM_ENABLE_LIBXML2=OFF \
+    -DLLVM_ENABLE_LIBEDIT=OFF \
+    -Wno-dev llvm
+
+cmake --build build
+cmake --install build
+
+rm -rf build
+
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_ENABLE_RTTI=ON \
+    -DLLVM_ENABLE_EH=ON \
+    -DCLANG_LINK_CLANG_DYLIB=OFF \
+    -DCLANG_BUILD_EXAMPLES=OFF \
+    -DCLANG_INCLUDE_DOCS=OFF \
+    -DCLANG_INCLUDE_TESTS=OFF \
+    -DLIBCLANG_BUILD_STATIC=OFF \
+    -Wno-dev clang
+
+cmake --build build
+cmake --install build
+
+rm -rf build
+
+# Building compiler-rt in GCC always results in segmentation fault.
+# Use clang for now.
+cmake -B build \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    compiler-rt
+
+cmake --build   build
+cmake --install build
+
+mkdir -p "$1/usr/lib/clang/$2/lib"
+mv "$1/usr/lib/linux" "$1/usr/lib/clang/$2/lib"
+
+rm -rf build
+
+cmake -B build \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLIBUNWIND_USE_COMPILER_RT=ON \
+    -Wno-dev libunwind
+
+cmake --build build
+cmake --install build
+
+rm -rf build
+
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DLIBCXXABI_LIBCXX_INCLUDES=libcxx/include \
+    -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+    -DLIBCXXABI_USE_COMPILER_RT=ON \
+    libcxxabi
+
+cmake --build build
+cmake --install build
+
+mkdir -p "$1/usr"
+cp -r libcxxabi/include "$1/usr"
+
+rm -rf build
+
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+    -DLIBCXX_CXX_ABI=libcxxabi \
+    -DLIBCXX_USE_COMPILER_RT=ON \
+    -DLIBCXX_HAS_MUSL_LIBC=ON \
+    -DLIBCXX_HAS_ATOMIC_LIB=OFF \
+    libcxx
+
+cmake --build build
+cmake --install build
+
+rm -rf build
+
+cmake -B build \
+    -DCMAKE_C_COMPILER=gcc \
+    -DCMAKE_CXX_COMPILER=g++ \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_ENABLE_RTTI=ON \
+    -DLLVM_ENABLE_EH=ON \
+    -DCLANG_LINK_CLANG_DYLIB=OFF \
+    -DCLANG_BUILD_EXAMPLES=OFF \
+    -DCLANG_INCLUDE_DOCS=OFF \
+    -DCLANG_INCLUDE_TESTS=OFF \
+    -DLIBCLANG_BUILD_STATIC=OFF \
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++ \
+    -DCLANG_DEFAULT_RTLIB=compiler-rt \
+    -Wno-dev clang
+
+cmake --build build
+cmake --install build
