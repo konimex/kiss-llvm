@@ -11,42 +11,23 @@ Building kiss-llvm
 ________________________________________________________________________
 
 To build LLVM compiler infrastructure from scratch (and without any
-traces of GCC), you'll need these.
+traces of GCC), you'll need to build and install the llvm bootstrap
+packaged as @llvm before building the main llvm package.
 
-Packages with @ in front of them denotes temporary bootstrap packages,
-you may safely uninstall them after you built the main LLVM package.
-
-This repo is only tested for x86_64, other architectures may need
-additional configurations.
+See the build file for @llvm for more information. It builds
+llvm proper first, clang (pass 1), compiler-rt, libunwind, libc++abi,
+libc++, and finally, clang again (pass 2).
 
 NOTE: This is what I could do, however, if you can find a better way
       that doesn't require 2 passes to clang, patches welcome! Also,
       some required packages may be missing.
 
-See respective build files for more information.
-
-Installation order as follows:
-1. @llvm-pass1
-2. @clang-pass1
-3. @compiler-rt
-4. @libunwind
-5. @libc++abi
-6. @libc++
-7. @clang-pass2
-   - NOTE: remove @clang-pass1 before installing @clang-pass2
-
 Recommended: Since downloading files repeatedly is a waste of bandwidth
-             (especially if you have a slow Internet), you can use these
-             commands to symlink thesource cache (usually located in
+             (especially if you have a slow Internet), you can use this
+             command to symlink thesource cache (usually located in
              $HOME/.cache/kiss/sources):
 
-$ ln -s llvm @llvm-pass1
-$ ln -s llvm @clang-pass1
-$ ln -s llvm @clang-pass2
-$ ln -s llvm @compiler-rt
-$ ln -s llvm @llvm-libunwind
-$ ln -s llvm @libc++abi
-$ ln -s llvm @libc++
+$ ln -s llvm @llvm
 
 And make sure to download the main LLVM package sources first and NOT
 the bootstrap packages (by using `kiss c` in the llvm directory, or by
@@ -77,6 +58,10 @@ $ for file in /usr/bin/* /usr/lib/*; do
 
 You may also need to check if any packages link to libatomic.so and
 libgcc_s.so.
+
+Since kiss package manager 5.2.0, all newly updated packages should have
+a dependency on gcc if they dynamically link the packages, you can
+rebuild the packages you need from that.
 
 You can use kiss-owns to check which file belongs to which package, and
 rebuild that.
