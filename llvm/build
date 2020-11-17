@@ -1,10 +1,5 @@
 #!/bin/sh -e
 
-(
-    cd libcxx
-    patch -p1 < ../libcxx-musl_compat.patch
-)
-
 sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
 sed -i 's/set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)/set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)/' compiler-rt/cmake/config-ix.cmake
 
@@ -60,4 +55,9 @@ ln -s clang++ "$1/usr/bin/c++"
 ln -s clang-cpp "$1/usr/bin/cpp"
 
 # Clang: POSIX compliance
+cat > "c99" <<'EOF'
+#!/bin/sh
+exec cc -std=c99 "$@"
+EOF
+
 install -m755 c99 "$1/usr/bin/c99"
