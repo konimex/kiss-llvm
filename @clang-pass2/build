@@ -16,7 +16,7 @@ cmake -B build \
     -DLIBCLANG_BUILD_STATIC=OFF \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++ \
     -DCLANG_DEFAULT_RTLIB=compiler-rt \
-    -Wno-dev
+    -Wno-dev clang
 
 cmake --build build
 cmake --install build

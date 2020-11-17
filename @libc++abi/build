@@ -12,10 +12,11 @@ cmake -B build \
     -DCMAKE_CXX_COMPILER=clang++ \
     -DLIBCXXABI_LIBCXX_INCLUDES=libcxx/include \
     -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
-    -DLIBCXXABI_USE_COMPILER_RT=ON
+    -DLIBCXXABI_USE_COMPILER_RT=ON \
+    libcxxabi
 
 cmake --build build
 cmake --install build
 
 mkdir -p "$1/usr"
-cp -r include "$1/usr"
+cp -r libcxxabi/include "$1/usr"

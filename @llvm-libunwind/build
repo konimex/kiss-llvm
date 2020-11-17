@@ -8,7 +8,7 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
     -DLIBUNWIND_USE_COMPILER_RT=ON \
-    -Wno-dev .
+    -Wno-dev libunwind
 
 cmake --build build
 cmake --install build

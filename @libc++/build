@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-patch -p1 < libcxx-musl_compat.patch
-sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' include/stddef.h
+sed -i 's/!defined(_GCC_MAX_ALIGN_T)/& \&\& !defined(__DEFINED_max_align_t)/' libcxx/include/stddef.h
 
 export DESTDIR="$1"
 
@@ -13,7 +12,8 @@ cmake -B build \
     -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
     -DLIBCXX_CXX_ABI=libcxxabi \
     -DLIBCXX_USE_COMPILER_RT=ON \
-    -DLIBCXX_HAS_MUSL_LIBC=ON
+    -DLIBCXX_HAS_MUSL_LIBC=ON \
+    libcxx
 
 cmake --build build
 cmake --install build
