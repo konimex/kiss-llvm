@@ -7,6 +7,18 @@ traces of GCC libraries. It also provides any alternatives for official
 KISS packages that cannot be built with LLVM.
 
 
+DISCLAIMER
+________________________________________________________________________
+
+While written specifically for KISS Linux in mind, no support will be
+provided by KISS Linux for packages built with this toolchain. The only
+repository I officially support are the KISS Linux official repository
+(kisslinux/repo on GitHub), I do not provide support for KISS community
+or user repositories. If any kisslinux/repo packages can't be built with
+this toolchain, please open an issue here. Otherwise, please bring it up
+to the maintainer's attention.
+
+
 Building kiss-llvm
 ________________________________________________________________________
 
