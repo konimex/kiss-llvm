@@ -7,7 +7,7 @@
 
 ./configure \
     --prefix=/usr \
-    CXXFLAGS="$CXXFLAGS -static -L$PWD/lzlib -I$PWD/lzlib -lunwind"
+    CXXFLAGS="$CXXFLAGS -static -L$PWD/lzlib -I$PWD/lzlib -lunwind -lc++abi"
 
 make
 make DESTDIR="$1" install
