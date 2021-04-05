@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+# Fix python3.
+sed -i 's|(3, 8)|(3, 9), (3, 8)|g' configure
+
+# Don't link with libatomic on LLVM systems.
+sed -i "s/\\'libraries\\'\\: \\[\\'-latomic\\'\\],/#/g" node.gyp
+
+CC=cc CXX=c++ ./configure \
+    --prefix=/usr \
+    --shared-zlib \
+    --without-intl \
+    --without-etw \
+    --without-dtrace \
+    --without-report \
+    --without-node-snapshot \
+    --without-node-code-cache \
+    --ninja
+
+ninja -C out/Release
+tools/install.py install "$1" /usr
+
+# Remove unneeded files.
+rm -rf "$1/usr/include/node/openssl"
+rm -rf "$1/usr/lib/node_modules/npm/scripts"
+rm -f  "$1/usr/lib/node_modules/npm/configure"
