@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cat <<EOF
+
+NOTE: To enable 'ccache' add this to your
+      '.shellrc' or '.profile'.
+
+-> export PATH=/usr/lib/ccache/bin:\$PATH
+
+NOTE: GCC is not supported out-of-the-box.
+      The following symlinks need to be created.
+
+-> ln -s /usr/bin/ccache /usr/lib/ccache/bin/gcc
+-> ln -s /usr/bin/ccache /usr/lib/ccache/bin/g++
+
+EOF
