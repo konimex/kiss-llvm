@@ -52,9 +52,10 @@ ________________________________________________________________________________
     - Link the LLVM bootstrap and the main LLVM source                     [5.3]
     - Build the LLVM bootstrap package and build the main LLVM package     [5.4]
     - Use LLVM-provided tools instead of GNU                               [5.5]
-    - Rebuild all packages that depend on GCC                              [5.6]
-    - Rebuild all other packages                                           [5.7]
-    - Remove GCC                                                           [5.8]
+    - Update all base packages to the latest version                       [5.6]
+    - Rebuild all packages that depend on GCC                              [5.7]
+    - Rebuild all other packages                                           [5.8]
+    - Remove GCC                                                           [5.9]
 
 - Userspace tools                                                          [6.0]
     - Filesystems                                                          [6.1]
@@ -430,7 +431,7 @@ Since you are looking at a kiss-llvm guide, this step is mandatory.
 
 
     [5.2] Clone the kiss-llvm repo and add it to $KISS_PATH
-    ----------------------------------------------------------------------------
+    ____________________________________________________________________________
 
     This repo contains the whole package directory for the LLVM toolchain and
     its bootstrap. If this is your first time building KISS Linux, refer to
@@ -446,7 +447,7 @@ Since you are looking at a kiss-llvm guide, this step is mandatory.
 
 
     [5.3] Link the LLVM bootstrap and the main LLVM source (optional)
-    ----------------------------------------------------------------------------
+    ____________________________________________________________________________
 
     The source of LLVM 11.1.0 is quite big (57M total), and we're going to use
     it twice (for bootstrap and for the main LLVM package). If you have a large
@@ -459,8 +460,9 @@ Since you are looking at a kiss-llvm guide, this step is mandatory.
     |                                                                          |
     +--------------------------------------------------------------------------+
 
+
     [5.4] Build the LLVM bootstrap package and build the main LLVM package
-    ----------------------------------------------------------------------------
+    ____________________________________________________________________________
 
     This will take some time.
 
@@ -480,7 +482,7 @@ Since you are looking at a kiss-llvm guide, this step is mandatory.
 
 
     [5.5] Use LLVM-provided tools instead of GNU
-    ----------------------------------------------------------------------------
+    ____________________________________________________________________________
 
     +--------------------------------------------------------------------------+
     |                                                                          |
@@ -496,7 +498,7 @@ Since you are looking at a kiss-llvm guide, this step is mandatory.
     +--------------------------------------------------------------------------+
 
 
-    [5.5] Update all base packages to the latest version
+    [5.6] Update all base packages to the latest version
     ____________________________________________________________________________
 
     This is how updates are performed on a KISS system. This command uses git
@@ -510,8 +512,8 @@ Since you are looking at a kiss-llvm guide, this step is mandatory.
     +--------------------------------------------------------------------------+
 
 
-    [5.6] Rebuild all packages that depend on GCC
-    ----------------------------------------------------------------------------
+    [5.7] Rebuild all packages that depend on GCC
+    ____________________________________________________________________________
 
     If you are planning to rebuild all packages, feel free to skip straight to
     section 5.7.
@@ -531,7 +533,7 @@ Since you are looking at a kiss-llvm guide, this step is mandatory.
     +--------------------------------------------------------------------------+
 
 
-    [5.7] Rebuild all other packages (optional)
+    [5.8] Rebuild all other packages (optional)
     ____________________________________________________________________________
 
     We simply cd to the installed packages database and use a glob to grab the
@@ -545,7 +547,7 @@ Since you are looking at a kiss-llvm guide, this step is mandatory.
     +--------------------------------------------------------------------------+
 
 
-    [5.8] Remove GCC
+    [5.9] Remove GCC
     ____________________________________________________________________________
 
     If there's no other package depending on GCC, you can safely remove GCC.
@@ -1022,9 +1024,9 @@ always mention if you're using kiss-llvm)
 
 See: @/contact
 
---------------------------------------------------------------------------------
+
 LEGAL
---------------------------------------------------------------------------------
+________________________________________________________________________________
 Copyright (c) 2019-2020 Dylan Araps
 Copyright (c) 2021      Dilyn Corner
 
