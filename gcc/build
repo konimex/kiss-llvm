@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+cat <<EOF
+
+==> To prevent the headache of having a kiss-llvm system accidentally
+    installing GCC (and therefore, preventing a multiple C++ stdlib
+    scenario), we decided to disable GCC for now. If GCC supports
+    building with libc++ in place of libstdc++, we can consider removing
+    this meta package.
+
+EOF
+exit 1
