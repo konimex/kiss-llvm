@@ -14,6 +14,7 @@
 
 patch -p1 < llvm-clang.patch
 patch -p1 < libressl.patch
+patch -p1 < crt.patch
 
 # Disable static by default.
 sed -i 's/\(base.crt_static_default =\) true/\1 false/' \
