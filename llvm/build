@@ -62,7 +62,8 @@ cat > "c99" <<'EOF'
 exec cc -std=c99 "$@"
 EOF
 
-install -m755 c99 "$1/usr/bin/c99"
+cp c99 "$1/usr/bin/c99"
+chmod 755 "$1/usr/bin/c99"
 
 # Clang: Override libexec, the path is hardcoded, unfortunately.
 mv -f "$1/usr/libexec/ccc-analyzer" "$1/usr/lib/clang"
