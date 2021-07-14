@@ -1,5 +1,5 @@
 |/
-|\ISS (unofficial repository)                      https://kisslinux.xyz
+|\ISS LINUX (unofficial repository)                https://kisslinux.xyz
 ________________________________________________________________________
 
 This is a kiss-compliant repository structure to build LLVM without any
@@ -13,12 +13,20 @@ repositories and NOT as a total replacement for KISS Linux.
 DISCLAIMER
 ________________________________________________________________________
 
-While written specifically for KISS Linux in mind, no support will be
-provided by KISS Linux for packages built with this toolchain. The only
-repository I officially support are the KISS Linux main repository, I do
-not provide support for KISS community or user repositories. If any main
-packages can't be built with this toolchain, please open an issue here.
-Otherwise, please bring it up to the maintainer's attention.
+While since 11 July KISS does support an LLVM/Clang toolchain as a first
+class citizen along with GCC [1] (some of our changes to accommodate
+systems built with kiss-llvm toolchain are also accepted), some packages
+(namely, eiwd) will not work with Clang at all at present (version 1.15,
+at the time I'm writing this). Those packages will *explicitly* depend
+on gcc (and any attempts to build gcc with this repo will automatically
+fail unless user manually overrides that by using their own repo, or
+directly building it, CRUX-style, note that I won't be supporting the
+use case though since I don't think it is possible without significant
+headache).
+
+When submitting reports about failure to build LLVM/Clang from this
+repo, report it here, not kisslinux/repo. Otherwise, you probably
+can open an issue there, but please state your toolchain.
 
 
 Building kiss-llvm
@@ -83,7 +91,9 @@ rebuild that.
 ________________________________________________________________________
 
 If you think replacing just the compiler and the binutils is not enough,
-head on over to Wyverkiss [1] since the distribution also removes the
+head on over to Wyverkiss [2] since the distribution also removes the
 need for GNU bison and many others (GNU make cannot be removed though).
+Please note that Wyverkiss will _NOT_ be supported by Dylan though.
 
-[1] https://github.com/wyvertux/wyverkiss
+[1] https://kisslinux.xyz/blog/20210711a
+[2] https://github.com/wyvertux/wyverkiss
