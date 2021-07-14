@@ -3,37 +3,20 @@ atk
 bzip2
 cairo
 cbindgen      make
-clang         make
 expat
 ffmpeg
 fontconfig
 freetype-harfbuzz
 gdk-pixbuf
 glib
+gnu-as        make
 gtk+3
-libICE
-libSM
-libX11
-libXau
-libXcomposite
-libXcursor
-libXdamage
-libXext
-libXfixes
-libXi
-libXinerama
-libXrandr
-libXrender
-libXt
-libXxf86vm
 libdrm
 libepoxy
 libffi
 libjpeg-turbo
 libpng
 libvpx
-libxcb
-libxshmfence
 llvm          make
 m4            make
 mesa
@@ -45,5 +28,6 @@ pixman
 pkgconf       make
 python        make
 rust          make
+wayland
 zip           make
 zlib
