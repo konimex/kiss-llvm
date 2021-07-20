@@ -13,7 +13,6 @@
 }
 
 patch -p1 < llvm-clang.patch
-patch -p1 < libressl.patch
 patch -p1 < cargo-miri.patch
 
 # Disable static by default.
