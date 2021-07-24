@@ -1,5 +1,5 @@
 |/
-|\ISS LINUX (unofficial repository)                https://kisslinux.xyz
+|\ISS LINUX (unofficial repository)                https://kisslinux.org
 ________________________________________________________________________
 
 This is a kiss-compliant repository structure to build LLVM without any
@@ -56,6 +56,7 @@ the bootstrap packages (by using `kiss c` in the llvm directory, or by
 using `kiss c llvm` after adding the kiss-llvm directory to $PATH, make
 sure the checksums are NOT changed, git should be able to track these).
 
+
 Using LLVM from kiss-llvm
 ________________________________________________________________________
 
@@ -88,6 +89,7 @@ rebuild the packages you need from that.
 You can use kiss-owns to check which file belongs to which package, and
 rebuild that.
 
+
 ________________________________________________________________________
 
 If you think replacing just the compiler and the binutils is not enough,
@@ -95,5 +97,5 @@ head on over to Wyverkiss [2] since the distribution also removes the
 need for GNU bison and many others (GNU make cannot be removed though).
 Please note that Wyverkiss will _NOT_ be supported by Dylan though.
 
-[1] https://kisslinux.xyz/blog/20210711a
+[1] https://kisslinux.org/blog/20210711a
 [2] https://github.com/wyvertux/wyverkiss
