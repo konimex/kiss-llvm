@@ -82,10 +82,6 @@ $ for file in /usr/bin/* /usr/lib/*; do
 You may also need to check if any packages link to libatomic.so and
 libgcc_s.so.
 
-Since kiss package manager 5.2.0, all newly updated packages should have
-a dependency on gcc if they dynamically link the packages, you can
-rebuild the packages you need from that.
-
 You can use kiss-owns to check which file belongs to which package, and
 rebuild that.
 
